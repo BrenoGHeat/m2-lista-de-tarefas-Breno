@@ -20,13 +20,16 @@ function renderElements(tasks){
 
       for(let i = 0; i < tasks.length ; i++) {
         const task = createTaskItem(tasks[i]);
-          captureUl.appendChild(task);
+          createTaskItem(task);
       
  }
 } ;
 
 
 function createTaskItem(task){
+
+
+  const ul = document.querySelector(".tasks__list");
 
   const li = document.createElement("li");
         li.classList.add("task__item");
@@ -55,15 +58,35 @@ function createTaskItem(task){
           span.classList.add("span-normal");
         } ;
 
+
         div.appendChild(span);
         div.appendChild(paragraphSpan);
 
         li.appendChild(div);
         li.appendChild(liButton);
-
-        return li ;
+        ul.appendChild(li);
+         
 
 }
 
 renderElements(tasks);
 
+
+const form = document.querySelector(".form__container");
+ 
+form.addEventListener('submit' , function (event){
+    
+    event.preventDefault();
+    
+    const inputTask = document.querySelector(".form__input--text").value;
+    const selectPriority = document.querySelector(".form__input--priority").value;
+
+    console.log(inputTask);
+    console.log(selectPriority);
+
+    createTaskItem({title:inputTask, type:selectPriority});
+    
+  
+});
+
+renderElements(tasks);

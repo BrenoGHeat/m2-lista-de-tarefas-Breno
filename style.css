@@ -97,6 +97,7 @@ body{
     height: 55px;
     font-size: 15px;
     margin-top: 30px;
+    cursor: pointer ;
 }
 
 .tasks__container{
