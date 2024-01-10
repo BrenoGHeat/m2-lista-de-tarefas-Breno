@@ -159,5 +159,6 @@ h2{
     height: 15px;
     border: none;
     background-repeat: no-repeat;
+    cursor:pointer;
 }
 

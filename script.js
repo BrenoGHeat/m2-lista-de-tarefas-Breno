@@ -20,16 +20,14 @@ function renderElements(tasks){
 
       for(let i = 0; i < tasks.length ; i++) {
         const task = createTaskItem(tasks[i]);
-          createTaskItem(task);
-      
+          captureUl.appendChild(task);
  }
 } ;
 
 
 function createTaskItem(task){
 
-
-  const ul = document.querySelector(".tasks__list");
+  const captureUl = document.querySelector(".tasks__list");
 
   const li = document.createElement("li");
         li.classList.add("task__item");
@@ -49,40 +47,45 @@ function createTaskItem(task){
   const liButton = document.createElement("button");
         liButton.classList.add("task__button--remove-task");
 
+      const toLowerCase = task.type.toLowerCase(); 
 
-        if( task.type === "Urgente" ){
+        if( toLowerCase === "urgente" ){
           span.classList.add("span-urgent");
-        } else if ( task.type === "Importante"){
+        } else if ( toLowerCase === "importante"){
           span.classList.add("span-important"); 
-        } else if( task.type === "Normal") {
+        } else if( toLowerCase === "normal") {
           span.classList.add("span-normal");
         } ;
-
 
         div.appendChild(span);
         div.appendChild(paragraphSpan);
 
         li.appendChild(div);
         li.appendChild(liButton);
-        ul.appendChild(li);
-         
+        captureUl.appendChild(li);
+
+       liButton.addEventListener("click" , function(){
+          
+        const test = tasks.indexOf(task);
+              tasks.splice(test , 1) ;
+        
+          renderElements(tasks);
+       })
+
+        return li ;
 
 }
 
 renderElements(tasks);
 
-
 const form = document.querySelector(".form__container");
  
-form.addEventListener('submit' , function (event){
+    form.addEventListener("submit" , function (event){
     
     event.preventDefault();
     
     const inputTask = document.querySelector(".form__input--text").value;
     const selectPriority = document.querySelector(".form__input--priority").value;
-
-    console.log(inputTask);
-    console.log(selectPriority);
 
     createTaskItem({title:inputTask, type:selectPriority});
     
@@ -90,3 +93,6 @@ form.addEventListener('submit' , function (event){
 });
 
 renderElements(tasks);
+
+
+
