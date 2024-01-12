@@ -14,6 +14,7 @@ const tasks = [
 
 function renderElements(tasks){
   
+  
   const captureUl = document.querySelector(".tasks__list");
 
     captureUl.innerHTML = ""
@@ -26,7 +27,7 @@ function renderElements(tasks){
 
 
 function createTaskItem(task){
-
+  
   const captureUl = document.querySelector(".tasks__list");
 
   const li = document.createElement("li");
@@ -65,21 +66,20 @@ function createTaskItem(task){
         captureUl.appendChild(li);
 
        liButton.addEventListener("click" , function(){
-          
-        const test = tasks.indexOf(task);
+
+         const test = tasks.indexOf(task);
               tasks.splice(test , 1) ;
-        
+              
           renderElements(tasks);
-       })
-
-        return li ;
-
+       }) ;
+       
+      return li ;
+    
 }
 
-renderElements(tasks);
 
 const form = document.querySelector(".form__container");
- 
+
     form.addEventListener("submit" , function (event){
     
     event.preventDefault();
@@ -87,9 +87,10 @@ const form = document.querySelector(".form__container");
     const inputTask = document.querySelector(".form__input--text").value;
     const selectPriority = document.querySelector(".form__input--priority").value;
 
-    createTaskItem({title:inputTask, type:selectPriority});
-    
-  
+    tasks.push({title:inputTask , type:selectPriority});
+
+    renderElements(tasks);
+     
 });
 
 renderElements(tasks);
